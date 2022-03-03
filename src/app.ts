@@ -1,10 +1,5 @@
 
-import './scripts/web-cmp-screen-console.ts'
-
-
-
-
-
+import './scripts/web-cmp-console.ts'
 
 class App {
     constructor() {
@@ -14,5 +9,5 @@ class App {
 
 
 }
-const app: App = new App();
+
 
