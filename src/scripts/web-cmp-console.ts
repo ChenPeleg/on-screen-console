@@ -46,14 +46,11 @@ class ScreenConsole extends HTMLElement {
         "flex-direction": "column",
         "background-color": backgroundColor,
         "border-radius": "5px",
-
         'left': '1px',
-
-
         "border": "2px solid grey",
         resize: 'both',
         overflow: 'auto',
-        'transition': `top ${transitionDetails}, left ${transitionDetails}, width ${transitionDetails}, height ${transitionDetails}`,
+        'transition': `top ${transitionDetails}, left ${transitionDetails}`//, width ${transitionDetails}, height ${transitionDetails}`,
 
       },
       "div#screen-console-div-id.minified": {
