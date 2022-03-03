@@ -1,13 +1,4 @@
+import './web-cmp-console.ts'
 
-import './scripts/web-cmp-console.ts'
-
-class App {
-    constructor() {
-
-    }
-
-
-
-}
 
 

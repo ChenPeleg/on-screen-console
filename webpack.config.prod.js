@@ -3,18 +3,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path')
 module.exports = {
     mode: "production",
-    entry: "../src/app.ts",
+    entry: "./src/app.ts",
     output: {
-        filename: "main.[contenthash].js",
+        filename: "screen-console.js",
         path: path.resolve(__dirname, 'dist'),
         publicPath: './'
 
     },
-    devtool: "eval-cheap-module-source-map",
+    devtool: "eval",
     
     plugins: [
         new CleanWebpackPlugin(), new HtmlWebpackPlugin({
-            template: '../src/template.html'
+            template: './src/template.html'
         })
     ],
 
