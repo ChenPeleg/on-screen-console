@@ -24,39 +24,41 @@ class ScreenConsole extends HTMLElement {
     document.addEventListener('keyup', this.keyPressCaptue.bind(this))
 
 
-    const backgroundColor = '#c5e6e3';
+    const mainGradbackgroundColor = 'linear-gradient(90deg, rgba(228,226,251,1) 0%, rgba(204,214,226,1) 100%);';
     const gradient1 = 'linear-gradient(90deg, rgba(87,212,233,1) 0%, rgba(144,212,230,1) 100%);'
     const shadowRoot: ShadowRoot = this.shadowRoot as ShadowRoot;
     const transitionDetails = '200ms ease-in-out'
     const cssObj: CSS = {
       "div#screen-console-div-id": {
         "position": 'fixed',
-        top: '1px',
+        top: '3px',
         "width": "30vw",
         "height": "30vw",
         "min-height": "5vw",
         "min-width": "5vw",
         "max-height": "90vw",
         "max-width": "40vw",
-        "margin": "0px 20px",
+        "margin": "0px 0px",
         "padding": "10px",
         "font-family": 'consolas',
         "font-size": '14px',
         "display": "flex",
         "flex-direction": "column",
-        "background-color": backgroundColor,
+        "background": mainGradbackgroundColor,
         "border-radius": "5px",
-        'left': '1px',
-        "border": "2px solid grey",
+        'left': '3px',
+        "border": "1px solid #aabbcc",
         resize: 'both',
         overflow: 'auto',
         'transition': `top ${transitionDetails}, left ${transitionDetails}`//, width ${transitionDetails}, height ${transitionDetails}`,
+        ,
+        'box-shadow': '0 3px 3px -1px rgba(0, 0, 0, .2), 0 2px 3px 1px rgba(0, 0, 0, .14), 0 1px 6px 1px rgba(0, 0, 0, .12);'
 
       },
       "div#screen-console-div-id.minified": {
         "width": "3vw",
-        "height": "4vh",
-        "min-height": "5vh",
+        "height": "3vw",
+        "min-height": "3vw",
         "min-width": "3vw",
         overflow: 'hidden',
         resize: 'none'
@@ -194,7 +196,7 @@ class ScreenConsole extends HTMLElement {
     if (event?.target) {
       const elem = (<HTMLElement>event.target)
       const number = elem.id.replace(this.screenIdPrefix, '');
-      const stl: LocationProp = this.getStyleFromNumber(Number(number));
+      const stl: LocationProp = this.createStylePositionFromNumber(Number(number));
       this.consoleElement.style.top = stl.top;
       this.consoleElement.style.bottom = stl.bottom;
       this.consoleElement.style.left = stl.left;
@@ -298,47 +300,55 @@ class ScreenConsole extends HTMLElement {
     })
     return HTML
   }
-  private getStyleFromNumber(number: number): LocationProp {
+  private createStylePositionFromNumber(number: number): LocationProp {
     const initialValue: string = 'initial';
+    const elmW = this.consoleElement.offsetWidth;
+    const elmH = this.consoleElement.offsetHeight;
+    const windowW = window.innerWidth;
+    const windowH = window.innerHeight;
     const initial: LocationProp = {
       bottom: initialValue,
       top: initialValue,
       left: initialValue,
       right: initialValue,
     }
-    const extremeLeft = '70%'
-    const extremeTop = '30%'
+    console.log(elmW, elmH)
+    const extremeLeft = Math.floor(+windowW - +elmW - 10).toString() + 'px';
+    const extremeTop = Math.floor(+windowH - +elmH - 10).toString() + 'px';
+    const midddleLeft = (Math.floor(+windowW - +elmW - 10) / 2).toString() + 'px';
+    const midddleTop = (Math.floor(+windowH - +elmH - 10) / 2).toString() + 'px';
+    const smallestPos = '3px'
     switch (number) {
       case 1:
         return {
           ...initial,
-          top: '1px', left: '1px'
+          top: smallestPos, left: smallestPos
         }; case 2:
         return {
           ...initial,
-          top: '1px', left: '30%'
+          top: smallestPos, left: midddleLeft
         }; case 3:
         return {
           ...initial,
-          top: '1px', left: extremeLeft
+          top: smallestPos, left: extremeLeft
         }; case 4:
-        return { ...initial, top: '20%', left: '1px' };
+        return { ...initial, top: midddleTop, left: smallestPos };
         ; case 5:
         return {
           ...initial,
-          top: '20%', left: '30%'
+          top: midddleTop, left: midddleLeft
         }; case 6:
         return {
           ...initial,
-          top: '20%', left: extremeLeft
+          top: midddleTop, left: extremeLeft
         }; case 7:
         return {
           ...initial,
-          top: extremeTop, left: '1px'
+          top: extremeTop, left: smallestPos
         }; case 8:
         return {
           ...initial,
-          top: extremeTop, left: '30%'
+          top: extremeTop, left: midddleLeft
         }
       case 9:
         return {

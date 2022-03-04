@@ -19,9 +19,9 @@ module.exports = {
         port: 9000,
         open: true,
 
-        // devMiddleware: {
-        //     writeToDisk: true,
-        // },
+        devMiddleware: {
+            writeToDisk: true,
+        },
 
         //  writeToDisk: true
     },
